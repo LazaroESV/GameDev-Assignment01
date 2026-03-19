@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 // Ensures the player has a Rigidbody2D
@@ -10,12 +11,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private Vector2 moveInput;
+    private float rotateInput;
 
     // Having the variables be public makes it so they can be changed directly in the inspector
     public float moveSpeed = 5f;
-    public float rotationAmount = 15f;
+    public float rotationAmount = 200f; 
 
-    private float rotateInput;
 
     private void Awake()
     {
@@ -28,20 +29,26 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
-        controls.Player.Rotate.performed += _ => rotateInput = 1f;
+        controls.Player.Rotate.performed += _ => rotateInput = _.ReadValue<float>();
         controls.Player.Rotate.canceled += _ => rotateInput = 0f;
-    }
-
-    private void Update()
-    {
-        if (rotateInput != 0f)
-        {
-            transform.Rotate(0f, rotationAmount * Time.deltaTime, 0f);
-        }
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+
+        if (rotateInput != 0f)
+        {
+            rb.MoveRotation(rb.rotation + rotateInput * rotationAmount * Time.fixedDeltaTime);
+        }
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Snowball"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
