@@ -10,6 +10,12 @@ public class PlayerMovement : MonoBehaviour
     private PlayerControls controls;
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private ManageHighScore highScoreManager;
+
+    [SerializeField]
+    private SaveSystem saveSystem;
+
     private Vector2 moveInput;
     private float rotateInput;
 
@@ -44,11 +50,14 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    // Death scenario
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Snowball"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            saveSystem.SaveGame();
+            highScoreManager.SaveHighScore();
+            saveSystem.QuitGame();
         }
     }
 }
