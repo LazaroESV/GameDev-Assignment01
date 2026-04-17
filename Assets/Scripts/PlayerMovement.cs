@@ -11,9 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]
-    private ManageHighScore highScoreManager;
-
-    [SerializeField]
     private SaveSystem saveSystem;
 
     private Vector2 moveInput;
@@ -55,8 +52,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Snowball"))
         {
-            saveSystem.SaveGame();
-            highScoreManager.SaveHighScore();
             saveSystem.QuitGame();
         }
     }

@@ -8,6 +8,8 @@ public class SaveSystem : MonoBehaviour
 
     [SerializeField]
     public ManageScore scoreManager;
+    [SerializeField]
+    private ManageHighScore highScoreManager;
 
     public void SaveGame()
     {
@@ -41,6 +43,8 @@ public class SaveSystem : MonoBehaviour
 
     public void QuitGame()
     {
+        SaveGame();
+        highScoreManager.SaveHighScore();
         SceneManager.LoadScene("Main Menu");
     }
 }
