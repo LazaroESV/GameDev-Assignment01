@@ -24,6 +24,7 @@ public class SaveSystem : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         PlayerPrefs.SetString("SaveData", json);
         PlayerPrefs.Save();
+        highScoreManager.SaveHighScore();
     }
 
     // Just in case it is needed in the future
@@ -44,7 +45,11 @@ public class SaveSystem : MonoBehaviour
     public void QuitGame()
     {
         SaveGame();
-        highScoreManager.SaveHighScore();
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void QuitGameWithoutSaving()
+    {
         SceneManager.LoadScene("Main Menu");
     }
 }

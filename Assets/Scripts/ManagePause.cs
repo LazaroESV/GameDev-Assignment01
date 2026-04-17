@@ -7,8 +7,8 @@ public class ManagePause : MonoBehaviour
     public GameObject pausePanel;
     [SerializeField]
     public GameObject resumeButton;
-
-    // vate bool isPaused = false;
+    [SerializeField]
+    private SaveSystem saveSystem;
 
     void Start()
     {
@@ -19,17 +19,15 @@ public class ManagePause : MonoBehaviour
 
     public void PauseGame()
     {
-        //isPaused = true;
-
         Time.timeScale = 0f;
         pausePanel.SetActive(true);
         resumeButton.SetActive(true);
+
+        saveSystem.SaveGame();
     }
 
     public void ResumeGame()
     {
-        //isPaused = false;
-
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         resumeButton.SetActive(false);

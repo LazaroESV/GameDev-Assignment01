@@ -26,13 +26,12 @@ public class ManageHighScore : MonoBehaviour
         // Sort descending (bonus points)
         list.scores.Sort((a, b) => b.score.CompareTo(a.score));
 
-        // Keep only top 5 (not explicitly required)
+        // Keep only top 5 
         if (list.scores.Count > 5)
         {
             list.scores.RemoveRange(5, list.scores.Count - 5);
         }
 
-        // Save back
         string newJson = JsonUtility.ToJson(list);
         PlayerPrefs.SetString("HighScores", newJson);
         PlayerPrefs.Save();

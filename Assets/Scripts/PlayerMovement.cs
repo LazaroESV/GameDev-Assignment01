@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Snowball"))
         {
-            saveSystem.QuitGame();
+            saveSystem.QuitGameWithoutSaving();
         }
     }
 }
