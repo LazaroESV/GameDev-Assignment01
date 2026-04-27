@@ -16,12 +16,12 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Rotate",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "45eb93a6-9081-489a-b077-ada580dc2e0f",
+                    "id": "6e6e6350-c528-4b4f-ad2b-4f56b80fce4f",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -36,28 +36,6 @@
                     "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "c6a94fd1-8561-47d6-950b-65a4e0e47d38",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "aab10fee-f0fe-4a23-b3d9-4a3fdf658f62",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "left",
@@ -83,12 +61,23 @@
                 },
                 {
                     "name": "",
-                    "id": "21f09ca1-38bf-420a-830e-302e55028210",
+                    "id": "380da191-604d-4019-922c-cb3a2ac1c21e",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "250d82b8-6f31-4127-bc96-9dc3f0748939",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotate",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

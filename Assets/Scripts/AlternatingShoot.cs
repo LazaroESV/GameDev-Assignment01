@@ -16,10 +16,11 @@ public class AlternatingShoot : MonoBehaviour
         while (true)
         {
             guns[currentGun].ShootBall();
+            Debug.Log("Shoot");
 
-            yield return new WaitForSeconds(20f);
+            yield return new WaitForSeconds(Random.Range(5, 20));
 
-            currentGun = (currentGun + 1) % guns.Length;
+            currentGun = (currentGun + Random.Range(1, 4)) % guns.Length;
         }
     }
 }

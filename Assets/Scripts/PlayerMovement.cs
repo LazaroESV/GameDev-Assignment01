@@ -11,14 +11,20 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]
+    private Animator anim;
+
+    [SerializeField]
     private SaveSystem saveSystem;
 
     private Vector2 moveInput;
-    private float rotateInput;
+    private bool jumpInput;
 
     // Having the variables be public makes it so they can be changed directly in the inspector
     public float moveSpeed = 5f;
-    public float rotationAmount = 200f; 
+    public float jumpForce = 8f;
+
+
+    private bool isGrounded;
 
 
     private void Awake()
@@ -32,27 +38,53 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
-        controls.Player.Rotate.performed += _ => rotateInput = _.ReadValue<float>();
-        controls.Player.Rotate.canceled += _ => rotateInput = 0f;
+        controls.Player.Jump.performed += _ => jumpInput = true;
+    }
+
+    private void Update()
+    {
+        // Animator parameters
+        anim.SetFloat("Speed", Mathf.Abs(moveInput.x));
+        anim.SetBool("IsJumping", !isGrounded);
+
+        // Flip Purly horizontally
+        if (moveInput.x < 0)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else if (moveInput.x > 0)
+            transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
 
-        if (rotateInput != 0f)
+        if (jumpInput && isGrounded)
         {
-            rb.MoveRotation(rb.rotation + rotateInput * rotationAmount * Time.fixedDeltaTime);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            jumpInput = false;
         }
 
     }
-
-    // Death scenario
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // Death scenario
         if (collision.gameObject.CompareTag("Snowball"))
         {
             saveSystem.QuitGameWithoutSaving();
+        }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
         }
     }
 }

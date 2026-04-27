@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Waterfall
+  m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
+  m_AnimatedSprites:
+  - {fileID: -5339876279958419376, guid: ae072c2db123c1f43add87c841847f09, type: 3}
+  - {fileID: 5592036516083328139, guid: 021131c791869b94e975ea6785ba454f, type: 3}
+  - {fileID: -5636672159996229241, guid: 3e4394532acfb8d4394daa4d7f37ff30, type: 3}
+  - {fileID: 4731578834760633733, guid: c963e6880182f904da49c45afc567917, type: 3}
+  - {fileID: -5123352898200600814, guid: cd2b5cff2c611e64a97378eea9550982, type: 3}
+  - {fileID: -2462439978834874448, guid: 6467976445d6e1646939c290eb29f039, type: 3}
+  - {fileID: 4762632163832423545, guid: 56daee28e81a21d48a17770f3b90731e, type: 3}
+  - {fileID: 6946773895387416990, guid: a90b2e574623e7746bd23a8687a12e4f, type: 3}
+  m_MinSpeed: 6
+  m_MaxSpeed: 6
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 1
+  m_TileAnimationFlags: 0
