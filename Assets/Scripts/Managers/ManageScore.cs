@@ -9,12 +9,19 @@ public class ManageScore : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.PlayGameplayMusic();
         UpdateUI();
     }
 
     public void AddScore()
     {
         score++;
+        UpdateUI();
+    }
+
+    public void SubtractScore(int value)
+    {
+        score -= value;
         UpdateUI();
     }
 

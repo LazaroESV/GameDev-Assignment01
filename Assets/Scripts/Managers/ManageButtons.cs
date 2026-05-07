@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayMenuMusic();
         displayPanel.SetActive(false);
     }
 

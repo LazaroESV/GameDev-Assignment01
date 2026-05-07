@@ -7,6 +7,9 @@ public class Popping : MonoBehaviour
     private ManageScore scoreManager;
     private BoxCollider2D wallZone;
 
+    [SerializeField]
+    private bool isBlackBalloon = false;
+
     public void Initialize(ManageBalloon bm, ManageScore sm, BoxCollider2D zone)
     {
         balloonManager = bm;
@@ -18,7 +21,16 @@ public class Popping : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            scoreManager.AddScore();
+            if (isBlackBalloon)
+            {
+                AudioManager.Instance.PlayBlackCollectSFX();
+                scoreManager.SubtractScore(3);
+            }
+            else
+            {
+                AudioManager.Instance.PlayYellowCollectSFX();
+                scoreManager.AddScore();
+            }
 
             balloonManager.StartCoroutine(balloonManager.RespawnBalloon(wallZone));
 

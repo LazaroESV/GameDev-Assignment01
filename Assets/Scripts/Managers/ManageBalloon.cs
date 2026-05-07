@@ -7,10 +7,20 @@ public class ManageBalloon : MonoBehaviour
     private GameObject balloonPrefab;
 
     [SerializeField]
+    private GameObject blackBalloonPrefab;
+
+    [SerializeField]
     private BoxCollider2D[] walls;
 
     [SerializeField]
     private ManageScore scoreManager;
+
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float blackBalloonChance = 0.25f;
+
+    private int balloonSpawnCount = 0;
+
 
     void Start()
     {
@@ -30,7 +40,31 @@ public class ManageBalloon : MonoBehaviour
             0f
         );
 
-        GameObject balloon = Instantiate(balloonPrefab, randomPos, Quaternion.Euler(0, 180, 0));
+        GameObject balloonToSpawn;
+
+        if (balloonSpawnCount >= 6)
+        {
+            balloonToSpawn = blackBalloonPrefab;
+            balloonSpawnCount = 0;
+        }
+        else
+        {
+            bool spawnBlack = Random.value < blackBalloonChance;
+
+            if (spawnBlack)
+            {
+                balloonToSpawn = blackBalloonPrefab;
+                balloonSpawnCount = 0;
+            }
+            else
+            {
+                balloonToSpawn = balloonPrefab;
+                balloonSpawnCount++;
+            }
+        }
+
+
+        GameObject balloon = Instantiate(balloonToSpawn, randomPos, Quaternion.Euler(0, 180, 0));
 
         balloon.GetComponent<Popping>().Initialize(this, scoreManager, wall);
     }

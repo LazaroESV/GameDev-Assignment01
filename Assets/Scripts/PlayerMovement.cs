@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private SaveSystem saveSystem;
 
+    [SerializeField]
+    private ParticleSystem landingSplash;
+
     private Vector2 moveInput;
     private bool jumpInput;
 
@@ -60,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (jumpInput && isGrounded)
         {
+            AudioManager.Instance.PlayJumpSFX();
+
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpInput = false;
         }
@@ -71,11 +76,19 @@ public class PlayerMovement : MonoBehaviour
         // Death scenario
         if (collision.gameObject.CompareTag("Snowball"))
         {
+            AudioManager.Instance.PlayGameOverSFX();
+
             saveSystem.QuitGameWithoutSaving();
         }
 
         if (collision.gameObject.CompareTag("Ground"))
         {
+            if (!isGrounded)
+            {
+                landingSplash.Play();
+                AudioManager.Instance.PlaySplashSFX();
+            }
+
             isGrounded = true;
         }
     }
@@ -87,4 +100,5 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
     }
+
 }
